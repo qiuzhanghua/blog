@@ -1,0 +1,20 @@
+### Get all Users
+
+GET http://localhost:3000/users
+
+### Find user by ID
+
+GET http://localhost:3000/users/395013eb-43b0-4f80-b858-e15e9351028f
+
+### Find user unknow
+GET http://localhost:3000/users/unkown
+
+### Create New User
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "email": "qiuzhanghua@icloud.com",
+  "name": "qiuzhanghua",
+  "password": "password"
+}
