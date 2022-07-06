@@ -6,13 +6,34 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { User } from "./users/user.entity";
 import { UsersModule } from "./users/users.module";
 
+export declare type DatabaseSupported =
+  | "mysql"
+  | "postgres"
+  | "cockroachdb"
+  | "sap"
+  | "spanner"
+  | "mariadb"
+  | "sqlite"
+  | "cordova"
+  | "react-native"
+  | "nativescript"
+  // | "sqljs" // I don't know why not for it
+  | "oracle"
+  | "mssql"
+  | "mongodb"
+  | "aurora-mysql"
+  | "aurora-postgres"
+  | "expo"
+  | "better-sqlite3"
+  | "capacitor";
+
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
     TypeOrmModule.forRoot({
-      type: process.env.DB_TYPE as "mysql" | "postgres" | "sqlite",
+      type: process.env.DB_TYPE as DatabaseSupported,
       host: process.env.DB_HOST,
       port: parseInt(process.env.DB_PORT),
       username: process.env.DB_USERNAME,
