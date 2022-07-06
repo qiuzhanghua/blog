@@ -13,7 +13,7 @@ pnpm install
 pnpm start
 
 # watch mode
-pnpm start:dev
+NODE_ENV=deveploment pnpm start:dev
 
 # production mode
 pnpm start:prod

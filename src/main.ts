@@ -1,6 +1,7 @@
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { ValidationPipe } from "@nestjs/common";
+import { getConfigToken } from "@nestjs/config";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -9,6 +10,11 @@ async function bootstrap() {
       whitelist: true,
     }),
   );
-  await app.listen(3000);
+  const port = parseInt(process.env.HTTP_PORT) | 3000; // from Command line only
+  await app.listen(port);
+  return port;
 }
-bootstrap();
+
+bootstrap().then((port) => {
+  console.log(`Http Server is started at port: ${port} ...`);
+});
