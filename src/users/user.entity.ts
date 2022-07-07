@@ -7,6 +7,7 @@ import {
   DeleteDateColumn,
   Unique,
 } from "typeorm";
+// import { Exclude } from "class-transformer";
 
 @Unique(["email"])
 @Entity("users")
@@ -29,6 +30,7 @@ export class User {
   @Column({ length: 128 })
   email: string;
 
+  // @Exclude()
   @Column({ length: 32 })
   password: string;
 }

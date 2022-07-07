@@ -16,14 +16,23 @@ export class UsersService {
     private usersRepository: Repository<User>,
   ) {}
 
-  findAll(): Promise<User[]> {
-    return this.usersRepository.find();
+  find(email: string): Promise<User[]> {
+    return this.usersRepository.find({ where: { email } });
   }
 
   async findOne(id: string): Promise<User> {
     const user = await this.usersRepository.findOneBy({ id });
     if (!user) throw new NotFoundException();
     return user;
+  }
+
+  async update(id: string, attrs: Partial<User>): Promise<User> {
+    const user = await this.usersRepository.findOneBy({ id });
+    if (!user) {
+      throw new NotFoundException();
+    }
+    Object.assign(user, attrs);
+    return await this.usersRepository.save(user);
   }
 
   async remove(id: string): Promise<void> {
