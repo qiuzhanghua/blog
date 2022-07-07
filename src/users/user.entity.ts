@@ -6,6 +6,7 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
   Unique,
+  AfterInsert,
 } from "typeorm";
 // import { Exclude } from "class-transformer";
 
@@ -33,4 +34,9 @@ export class User {
   // @Exclude()
   @Column({ length: 32 })
   password: string;
+
+  @AfterInsert()
+  logInsert() {
+    console.log("Insert User with id", this.id);
+  }
 }
